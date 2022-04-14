@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { ReactChildWithProps } from '@/utils/reactProps';
 import { Header } from './header';
 import { Footer } from './Footer';
+import { Container } from '@chakra-ui/react';
 
 interface Props {
   title?: string;
@@ -34,7 +35,7 @@ export const Layout: ReactChildWithProps<Props> = ({
         <meta property='og:type' content='website' />
       </Head>
       <Header />
-      {children}
+      <Container maxW='container.xl'>{children}</Container>
       <Footer />
     </>
   );

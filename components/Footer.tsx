@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Footer: React.FC = () => {
   return (
-    <div className='mt-10 p-10 flex items-center justify-center text-app-text2'>
+    <div className='mt-10 p-10 flex items-center justify-center text-app-text2 text-lg'>
       Made with
       <svg
         stroke-width='0'

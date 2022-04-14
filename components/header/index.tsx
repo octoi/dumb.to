@@ -42,8 +42,9 @@ export const Header: React.FC = () => {
             </Link>
             <Link passHref href={Paths.register}>
               <Button
-                variant='outline'
-                className='text-app-blueText border-app-blue1 hover:underline hover:bg-app-blue1'
+                variant='solid'
+                colorScheme='teal'
+                className='hover:underline'
               >
                 Create account
               </Button>
