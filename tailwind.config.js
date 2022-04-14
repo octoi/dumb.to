@@ -1,14 +1,18 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
+  important: true,
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     colors: {
+      ...colors,
       app: {
         bg: '#FFFEFE',
         text1: '#36352E',
-        text2: '9A9A96',
+        text2: '#9A9A96',
         brown1: '#E9D4CC',
         brown2: '#C8B9B1',
         orange1: '#FDDFCC',
