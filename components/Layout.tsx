@@ -2,6 +2,7 @@ import React from 'react';
 import Head from 'next/head';
 import { ReactChildWithProps } from '@/utils/reactProps';
 import { Header } from './header';
+import { Footer } from './Footer';
 
 interface Props {
   title?: string;
@@ -34,6 +35,7 @@ export const Layout: ReactChildWithProps<Props> = ({
       </Head>
       <Header />
       {children}
+      <Footer />
     </>
   );
 };

@@ -7,7 +7,7 @@ import { SearchIcon } from '@chakra-ui/icons';
 
 export const Header: React.FC = () => {
   return (
-    <div className='bg-slate-50'>
+    <div className='bg-slate-50 mb-10'>
       <Container maxW='container.xl' py={3}>
         <Flex alignItems='center' justify='space-between'>
           <Flex alignItems='center'>
@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
             <Link passHref href={Paths.register}>
               <Button
                 variant='outline'
-                className='text-app-text1 border-app-blue1 hover:underline hover:bg-app-blue1'
+                className='text-app-blueText border-app-blue1 hover:underline hover:bg-app-blue1'
               >
                 Create account
               </Button>
