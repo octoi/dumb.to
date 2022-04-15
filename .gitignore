@@ -37,3 +37,9 @@ yarn-error.log*
 # lock files
 *.lock
 
+# appwrite config
+appwrite.config.json
+
+# workspace
+.vscode
+.idea
