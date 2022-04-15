@@ -1,4 +1,5 @@
 import { loginUserApi, registerUserApi, saveUserDataApi } from '@/api/account';
+import { setUserData } from '@/stores/user.store';
 
 export const registerUser = (name: string, email: string, password: string) => {
   return new Promise((resolve, reject) => {
@@ -10,8 +11,12 @@ export const registerUser = (name: string, email: string, password: string) => {
 
             saveUserDataApi(userData.userId, name, email, profile)
               .then((data) => {
-                console.log(userData);
-                console.log(data);
+                setUserData({
+                  id: userData.userId,
+                  name,
+                  email,
+                  profile,
+                });
                 resolve(data);
               })
               .catch((err) => {

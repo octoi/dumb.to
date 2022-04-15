@@ -2,14 +2,40 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
 import { Button, Flex, Input } from '@chakra-ui/react';
+import { loginUserApi } from '@/api/account';
+import { showToast } from '@/utils/toast';
+import { useRouter } from 'next/router';
+import { loadDataFromSession } from '@/stores/user.store';
 
 export const LoginForm: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const router = useRouter();
+
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
+    setLoading(true);
+
+    loginUserApi(email, password)
+      .then((userData) => {
+        showToast(
+          'Good to see you again!',
+          'Logged in successfully',
+          'success'
+        );
+
+        loadDataFromSession();
+
+        const nextPath = router.query?.next?.toString() || Paths.app;
+        router.push(nextPath);
+      })
+      .catch((err) => {
+        showToast('Failed to login user', err?.message, 'error');
+      });
+
+    setLoading(false);
   };
 
   return (
