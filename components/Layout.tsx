@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { ReactChildWithProps } from '@/utils/reactProps';
+import { ReactComponent } from '@/utils/reactProps';
 import { Header } from './header';
 import { Footer } from './Footer';
 import { Container } from '@chakra-ui/react';
@@ -11,7 +11,7 @@ interface Props {
   image?: string;
 }
 
-export const Layout: ReactChildWithProps<Props> = ({
+export const Layout: ReactComponent<Props> = ({
   children,
   title,
   description,

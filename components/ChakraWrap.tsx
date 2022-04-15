@@ -1,9 +1,6 @@
-import { colors } from '@/utils/colors';
-import { ReactChild } from '@/utils/reactProps';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ReactComponent } from '@/utils/reactProps';
+import { ChakraProvider, theme } from '@chakra-ui/react';
 
-const theme = extendTheme({ colors });
-
-export const ChakraWrap: ReactChild = ({ children }) => {
+export const ChakraWrap: ReactComponent = ({ children }) => {
   return <ChakraProvider theme={theme}>{children}</ChakraProvider>;
 };
