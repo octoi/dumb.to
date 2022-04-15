@@ -8,7 +8,7 @@ interface UserType {
   profile: string;
 }
 
-const loadInitialData = () => {
+export const loadDataFromSession = () => {
   getUserFromSessionApi()
     .then((data: any) => {
       setUserData({
@@ -24,8 +24,6 @@ const loadInitialData = () => {
 
   return null;
 };
-
-loadInitialData();
 
 export const userStore = createState<UserType | null>(null);
 
