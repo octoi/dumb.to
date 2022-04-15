@@ -4,12 +4,15 @@ import { Paths } from '@/utils/paths';
 import { Button, Flex, Input } from '@chakra-ui/react';
 import { registerUser } from './register';
 import { showToast } from '@/utils/toast';
+import { useRouter } from 'next/router';
 
 export const RegisterForm: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
@@ -22,6 +25,9 @@ export const RegisterForm: React.FC = () => {
           'Registered an account successfully',
           'success'
         );
+
+        const nextPath = router.query?.next?.toString() || Paths.app;
+        router.push(nextPath);
       })
       .catch(([title, description]) => {
         showToast(title, description, 'error');
