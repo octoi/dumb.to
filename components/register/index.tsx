@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
 import { Button, Flex, Input } from '@chakra-ui/react';
+import { registerUser } from './register';
+import { showToast } from '@/utils/toast';
 
 export const RegisterForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -11,6 +13,21 @@ export const RegisterForm: React.FC = () => {
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
+    setLoading(true);
+
+    registerUser(name, email, password)
+      .then(() => {
+        showToast(
+          `Welcome ${name} to dumb.to`,
+          'Registered an account successfully',
+          'success'
+        );
+      })
+      .catch(([title, description]) => {
+        showToast(title, description, 'error');
+      });
+
+    setLoading(false);
   };
 
   return (

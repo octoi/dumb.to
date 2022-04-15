@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^1.8.8",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@hookstate/core": "^3.0.13",
+    "appwrite": "^7.0.0",
     "framer-motion": "^6",
     "next": "12.1.5",
     "react": "18.0.0",

@@ -5,7 +5,7 @@ export const Footer: React.FC = () => {
     <div className='mt-10 p-10 flex items-center justify-center text-app-text2 text-lg'>
       Made with
       <svg
-        stroke-width='0'
+        strokeWidth='0'
         viewBox='0 0 512 512'
         focusable='false'
         className='mx-1 fill-red-400'
