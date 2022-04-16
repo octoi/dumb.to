@@ -13,13 +13,16 @@ import {
   AlertDialogOverlay,
   Avatar,
   Button,
+  IconButton,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  Stack,
   useDisclosure,
 } from '@chakra-ui/react';
+import { AddIcon } from '@chakra-ui/icons';
 
 interface Props {
   user: UserType;
@@ -40,29 +43,40 @@ export const LoggedInUserRHS: React.FC<Props> = ({ user }) => {
 
   return (
     <>
-      <Menu>
-        <MenuButton>
-          <Avatar src={user.profile} name={user.name} />
-        </MenuButton>
-        <MenuList>
-          <Link href={`${Paths.user}/${user.email}`} passHref>
-            <MenuItem>Profile</MenuItem>
-          </Link>
-          <Link href={Paths.newPost} passHref>
-            <MenuItem>New post</MenuItem>
-          </Link>
-          <Link href={Paths.search} passHref>
-            <MenuItem>Search</MenuItem>
-          </Link>
-          <Link href={Paths.settings} passHref>
-            <MenuItem>Settings</MenuItem>
-          </Link>
-          <MenuDivider />
-          <MenuItem onClick={onOpen} className='text-red-400'>
-            Logout
-          </MenuItem>
-        </MenuList>
-      </Menu>
+      <Stack direction='row' spacing={4} align='center'>
+        <Link passHref href={Paths.newPost}>
+          <Button
+            variant='solid'
+            colorScheme='teal'
+            className='hover:underline'
+          >
+            New post
+          </Button>
+        </Link>
+        <Menu>
+          <MenuButton>
+            <Avatar src={user.profile} name={user.name} />
+          </MenuButton>
+          <MenuList>
+            <Link href={`${Paths.user}/${user.email}`} passHref>
+              <MenuItem>Profile</MenuItem>
+            </Link>
+            <Link href={Paths.newPost} passHref>
+              <MenuItem>New post</MenuItem>
+            </Link>
+            <Link href={Paths.search} passHref>
+              <MenuItem>Search</MenuItem>
+            </Link>
+            <Link href={Paths.settings} passHref>
+              <MenuItem>Settings</MenuItem>
+            </Link>
+            <MenuDivider />
+            <MenuItem onClick={onOpen} className='text-red-400'>
+              Logout
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </Stack>
 
       {/* Logout alert */}
 
