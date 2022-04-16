@@ -55,10 +55,10 @@ export const LoggedInUserRHS: React.FC<Props> = ({ user }) => {
         </Link>
         <Menu>
           <MenuButton>
-            <Avatar src={user.profile} name={user.name} />
+            <Avatar src={user?.profile} name={user?.name} />
           </MenuButton>
           <MenuList>
-            <Link href={`${Paths.user}/${user.email}`} passHref>
+            <Link href={`${Paths.user}/${user?.email}`} passHref>
               <MenuItem>Profile</MenuItem>
             </Link>
             <Link href={Paths.newPost} passHref>

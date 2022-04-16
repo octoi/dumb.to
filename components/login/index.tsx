@@ -77,7 +77,7 @@ export const LoginForm: React.FC = () => {
           </Button>
           <p className='text-app-text2'>
             Dont have an account ?{' '}
-            <Link href={Paths.login} passHref>
+            <Link href={Paths.register} passHref>
               <span className='font-medium cursor-pointer hover:text-app-text1 underline'>
                 Create an account
               </span>
