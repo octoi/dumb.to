@@ -1,11 +1,18 @@
 import React from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
-import { Button, Container, Flex, IconButton, Stack } from '@chakra-ui/react';
+import { Container, Flex, IconButton, Stack } from '@chakra-ui/react';
 import { SearchBar } from './SearchBar';
+import { GuestUserRHS } from './GuestUserRHS';
+import { useState } from '@hookstate/core';
+import { userStore } from '@/stores/user.store';
+import { LoggedInUserRHS } from './LoggedInUserRHS';
 import { SearchIcon } from '@chakra-ui/icons';
 
 export const Header: React.FC = () => {
+  const userState = useState(userStore);
+  const user = userState.get();
+
   return (
     <div className='bg-slate-50 mb-10'>
       <Container maxW='container.xl' py={3}>
@@ -18,19 +25,9 @@ export const Header: React.FC = () => {
                 className='w-20 cursor-pointer'
               />
             </Link>
-
             <SearchBar />
           </Flex>
-
           <Stack direction='row' spacing={4} align='center'>
-            <Link passHref href={Paths.login}>
-              <Button
-                variant='ghost'
-                className='text-app-text1 hover:underline hidden md:block'
-              >
-                Log in
-              </Button>
-            </Link>
             <Link passHref href={Paths.search}>
               <IconButton
                 variant='solid'
@@ -40,15 +37,7 @@ export const Header: React.FC = () => {
                 className='block md:hidden'
               />
             </Link>
-            <Link passHref href={Paths.register}>
-              <Button
-                variant='solid'
-                colorScheme='teal'
-                className='hover:underline'
-              >
-                Create account
-              </Button>
-            </Link>
+            {user ? <LoggedInUserRHS user={user} /> : <GuestUserRHS />}
           </Stack>
         </Flex>
       </Container>
