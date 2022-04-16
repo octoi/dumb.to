@@ -1,7 +1,7 @@
 import { getUserFromSessionApi } from '@/api/account';
 import { createState, Downgraded } from '@hookstate/core';
 
-interface UserType {
+export interface UserType {
   id: string;
   name: string;
   email: string;
@@ -34,6 +34,6 @@ export const getUserData = () => {
 export const setUserData = (user: UserType) => {
   userStore.set(user);
 };
-export const removeData = () => {
+export const removeUserData = () => {
   userStore.set(null);
 };
