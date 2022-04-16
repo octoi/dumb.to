@@ -31,6 +31,11 @@ export const getUserFromSessionApi = () => {
   });
 };
 
+// DELETE session
+export const deleteUserSessionApi = () => {
+  return appWriteSDK.account.deleteSession('current');
+};
+
 // SAVE user data to appwrite database
 export const saveUserDataApi = (
   userId: string,
