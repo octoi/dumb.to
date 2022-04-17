@@ -9,12 +9,16 @@ import { userStore } from '@/stores/user.store';
 import { LoggedInUserRHS } from './LoggedInUserRHS';
 import { SearchIcon } from '@chakra-ui/icons';
 
-export const Header: React.FC = () => {
+interface Props {
+  removeMargin?: boolean;
+}
+
+export const Header: React.FC<Props> = ({ removeMargin }) => {
   const userState = useState(userStore);
   const user = userState.get();
 
   return (
-    <div className='bg-slate-50 mb-10'>
+    <div className={`bg-slate-50 ${!removeMargin && 'mb-10'}`}>
       <Container maxW='container.xl' py={3}>
         <Flex alignItems='center' justify='space-between'>
           <Flex alignItems='center'>
