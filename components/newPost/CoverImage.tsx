@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent } from '@/utils/reactProps';
+import { ReactComponent } from '@/utils/reactTypes';
 import { IconButton } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { showToast } from '@/utils/toast';
@@ -65,6 +65,7 @@ export const CoverImage: ReactComponent<Props> = ({
             className='absolute top-0 right-0'
             size='xs'
             onClick={() => setCoverImage(undefined)}
+            disabled={disabled}
             icon={<CloseIcon />}
           />
         </div>
