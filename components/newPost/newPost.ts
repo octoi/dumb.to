@@ -7,21 +7,25 @@ export const newPost = (
   content: string,
   cover?: File
 ) => {
+  // TODO: refactor this crap
   return new Promise(async (resolve, reject) => {
-    let imageURL;
-    // upload image if file exists
     if (cover) {
       uploadImageToStorageApi(cover)
         .then((res) => {
-          imageURL = getImageURLApi(res.$id);
+          const imageURL = getImageURLApi(res.$id);
+          savePostToDatabaseApi(userId, title, content, imageURL)
+            .then((data) => {
+              resolve(data.$id);
+            })
+            .catch(reject);
+        })
+        .catch(reject);
+    } else {
+      savePostToDatabaseApi(userId, title, content)
+        .then((data) => {
+          resolve(data.$id);
         })
         .catch(reject);
     }
-
-    savePostToDatabaseApi(userId, title, content, imageURL)
-      .then((data) => {
-        resolve(data.$id);
-      })
-      .catch(reject);
   });
 };
