@@ -1,9 +1,15 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 import { CoverImage } from './CoverImage';
 import { CancelPost } from './CancelPost';
 import { ViewIcon } from '@chakra-ui/icons';
 import { PageState } from '.';
 import { SetState } from '@/utils/reactTypes';
+import { newPost } from './newPost';
+import { Paths } from '@/utils/paths';
+import { showToast } from '@/utils/toast';
+import { useState as useHookState } from '@hookstate/core';
+import { userStore } from '@/stores/user.store';
 import {
   Button,
   Container,
@@ -39,9 +45,34 @@ export const NewPostForm: React.FC<Props> = ({
   setLoading,
   setPageState,
 }) => {
+  const router = useRouter();
+
+  const userState = useHookState(userStore);
+  const user = userState.get();
+
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
     setLoading(true);
+
+    if (!user) return;
+
+    newPost(user.id, title, content, coverImage)
+      .then((postId) => {
+        showToast(
+          'Hope everyone likes it 💗',
+          'Post created successfully',
+          'success'
+        );
+
+        const postPath = `${Paths.post}/${postId}`;
+        router.push(postPath);
+      })
+      .catch((err) => {
+        showToast('Failed to create post', err?.message, 'error');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -67,7 +98,7 @@ export const NewPostForm: React.FC<Props> = ({
         />
         <FormControl isRequired>
           <FormLabel fontSize='lg' htmlFor='title'>
-            Title
+            Title ({title.length}/200)
           </FormLabel>
           <Input
             id='title'
@@ -81,6 +112,7 @@ export const NewPostForm: React.FC<Props> = ({
             onChange={(e) => setTitle(e.target.value)}
             disabled={loading}
             isRequired
+            maxLength={200}
           />
           <FormLabel fontSize='lg'>Content ({content.length}/5000)</FormLabel>
           <Textarea
