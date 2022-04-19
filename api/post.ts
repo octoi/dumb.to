@@ -29,10 +29,18 @@ export const getPostFromDatabaseApi = (postId: string) => {
 };
 
 // get posts of a user
-export const getPostsOfUserFromDatabaseApi = (userId: string, limit?: number) => {
+export const getPostsOfUserFromDatabaseApi = (
+  userId: string,
+  limit?: number
+) => {
   return appWriteSDK.database.listDocuments(
     'posts',
     [Query.equal('userId', userId)],
     limit
   );
+};
+
+// delete post
+export const deletePostFromDatabaseApi = (postId: string) => {
+  return appWriteSDK.database.deleteDocument('posts', postId);
 };

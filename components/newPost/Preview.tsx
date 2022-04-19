@@ -29,7 +29,7 @@ export const Preview: React.FC<Props> = ({
       )}
       <Container maxW='container.xl' className='mt-10'>
         <Flex align='center' justify='space-between' mb={5}>
-          <h2 className='text-3xl font-bold'>{title}</h2>
+          <h2 className='text-4xl font-bold'>{title}</h2>
           <IconButton
             variant='ghost'
             colorScheme='teal'
