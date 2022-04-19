@@ -31,6 +31,11 @@ export const getUserFromSessionApi = () => {
   });
 };
 
+// GET user from database
+export const getUserFormDatabaseApi = (userId: string) => {
+  return appWriteSDK.database.getDocument('users', userId);
+};
+
 // DELETE session
 export const deleteUserSessionApi = () => {
   return appWriteSDK.account.deleteSession('current');
