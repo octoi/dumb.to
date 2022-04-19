@@ -9,6 +9,7 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  banner?: string;
 }
 
 export const Layout: ReactComponent<Props> = ({
@@ -16,10 +17,16 @@ export const Layout: ReactComponent<Props> = ({
   title,
   description,
   image,
+  banner,
 }) => {
   return (
     <>
-      <LayoutHead title={title} description={description} image={image} />
+      <LayoutHead
+        title={title}
+        description={description}
+        image={image}
+        banner={banner}
+      />
       <Header />
       <Container maxW='container.xl'>{children}</Container>
       <Footer />
@@ -27,7 +34,12 @@ export const Layout: ReactComponent<Props> = ({
   );
 };
 
-export const LayoutHead: React.FC<Props> = ({ title, description, image }) => {
+export const LayoutHead: React.FC<Props> = ({
+  title,
+  description,
+  image,
+  banner,
+}) => {
   title = title || 'DUMB Community 🤯';
   description =
     description ||
@@ -41,7 +53,7 @@ export const LayoutHead: React.FC<Props> = ({ title, description, image }) => {
       <meta name='description' content={description} />
       <meta property='og:title' content={title} />
       <meta property='og:description' content={description} />
-      <meta property='og:image' content={image} />
+      <meta property='og:image' content={banner ? banner : image} />
       <meta property='og:type' content='website' />
     </Head>
   );
