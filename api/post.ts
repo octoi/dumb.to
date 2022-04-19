@@ -1,4 +1,5 @@
 import { getAppWriteSDK } from '@/stores/appwrite.store';
+import { Query } from 'appwrite';
 
 const appWriteSDK = getAppWriteSDK();
 
@@ -25,4 +26,13 @@ export const savePostToDatabaseApi = (
 // get post
 export const getPostFromDatabaseApi = (postId: string) => {
   return appWriteSDK.database.getDocument('posts', postId);
+};
+
+// get posts of a user
+export const getPostsOfUserFromDatabaseApi = (userId: string, limit?: number) => {
+  return appWriteSDK.database.listDocuments(
+    'posts',
+    [Query.equal('userId', userId)],
+    limit
+  );
 };
