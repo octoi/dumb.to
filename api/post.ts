@@ -9,18 +9,13 @@ export const savePostToDatabaseApi = (
   content: string,
   cover?: string
 ) => {
-  let data = cover
-    ? {
-        userId,
-        title,
-        content,
-        cover,
-      }
-    : {
-        userId,
-        title,
-        content,
-      };
+  const data = {
+    userId,
+    title,
+    content,
+    createdAt: Date.now(),
+    cover,
+  };
 
   return appWriteSDK.database.createDocument('posts', 'unique()', data, [
     'role:all',
