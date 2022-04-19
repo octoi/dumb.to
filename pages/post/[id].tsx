@@ -14,7 +14,7 @@ interface Props {
 export const PostDetailPage: NextPage<Props> = ({ post }) => {
   return (
     <>
-      <LayoutHead title={post.title} image={post.cover} />
+      <LayoutHead title={post.title} banner={post.cover} />
       <Header removeMargin />
       <Post post={post} />
       <Footer />
