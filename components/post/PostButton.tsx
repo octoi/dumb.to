@@ -74,6 +74,7 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
           aria-label='preview'
           icon={<AiOutlineHeart className='text-2xl' />}
           onClick={handleLikePost}
+          disabled={isAuthor}
         />
       </Stack>
 
