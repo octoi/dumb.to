@@ -2,7 +2,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { UserType } from '@/stores/user.store';
 import { AiOutlineDelete, AiOutlineHeart } from 'react-icons/ai';
-import { IconButton, useDisclosure, Button } from '@chakra-ui/react';
+import { IconButton, useDisclosure, Button, Stack } from '@chakra-ui/react';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -45,7 +45,7 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
 
   return (
     <>
-      <IconButton
+      {/* <IconButton
         variant='ghost'
         colorScheme='red'
         aria-label='preview'
@@ -57,7 +57,25 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
           )
         }
         onClick={isAuthor ? onOpen : handleLikePost}
-      />
+      /> */}
+      <Stack direction='row' gap={2}>
+        {isAuthor && (
+          <IconButton
+            variant='ghost'
+            colorScheme='red'
+            aria-label='preview'
+            icon={<AiOutlineDelete className='text-2xl' />}
+            onClick={onOpen}
+          />
+        )}
+        <IconButton
+          variant='ghost'
+          colorScheme='red'
+          aria-label='preview'
+          icon={<AiOutlineHeart className='text-2xl' />}
+          onClick={handleLikePost}
+        />
+      </Stack>
 
       {/* Delete post confirm */}
       <AlertDialog
