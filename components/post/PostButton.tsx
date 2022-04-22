@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { UserType } from '@/stores/user.store';
 import { AiOutlineDelete, AiOutlineHeart } from 'react-icons/ai';
-import { IconButton, useDisclosure, Button, Stack } from '@chakra-ui/react';
+import { deletePostFromDatabaseApi } from '@/api/post';
+import { showToast } from '@/utils/toast';
+import { Paths } from '@/utils/paths';
+import { getPostLikesApi, likePostApi } from '@/api/like';
+import {
+  IconButton,
+  useDisclosure,
+  Button,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import {
   AlertDialog,
   AlertDialogBody,
@@ -11,9 +21,6 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from '@chakra-ui/react';
-import { deletePostFromDatabaseApi } from '@/api/post';
-import { showToast } from '@/utils/toast';
-import { Paths } from '@/utils/paths';
 
 interface Props {
   postId: string;
@@ -22,11 +29,27 @@ interface Props {
 }
 
 export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
+  const [likeCount, setLikeCount] = useState(0);
+  const [isUserLiked, setIsUserLiked] = useState(false);
+
   const router = useRouter();
 
   const cancelRef = React.useRef<any>();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    getPostLikesApi(postId).then((data) => {
+      setLikeCount(data.total);
+
+      if (
+        data.documents.filter((like: any) => like?.userId === user.id)
+          .length !== 0
+      ) {
+        setIsUserLiked(true);
+      }
+    });
+  }, []);
 
   const handleDeletePost = () => {
     if (!isAuthor) return;
@@ -41,24 +64,22 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
       });
   };
 
-  const handleLikePost = () => {};
+  const handleLikePost = () => {
+    if (isAuthor) return;
+
+    likePostApi(postId, user.id)
+      .then(() => {
+        setLikeCount((prev) => (isUserLiked ? prev - 1 : prev + 1));
+        setIsUserLiked((prev) => !prev);
+      })
+      .catch((err) => {
+        showToast('Oops something went wrong', err?.message, 'error');
+      });
+  };
 
   return (
     <>
-      {/* <IconButton
-        variant='ghost'
-        colorScheme='red'
-        aria-label='preview'
-        icon={
-          isAuthor ? (
-            <AiOutlineDelete className='text-2xl' />
-          ) : (
-            <AiOutlineHeart className='text-2xl' />
-          )
-        }
-        onClick={isAuthor ? onOpen : handleLikePost}
-      /> */}
-      <Stack direction='row' gap={2}>
+      <Stack direction='row'>
         {isAuthor && (
           <IconButton
             variant='ghost'
@@ -69,12 +90,17 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
           />
         )}
         <IconButton
-          variant='ghost'
-          colorScheme='red'
+          variant={isUserLiked ? 'solid' : 'ghost'}
+          colorScheme='teal'
           aria-label='preview'
-          icon={<AiOutlineHeart className='text-2xl' />}
-          onClick={handleLikePost}
+          icon={
+            <Stack direction='row' gap={1} p={2} align='center'>
+              <AiOutlineHeart className='text-2xl' />
+              <Text fontSize='lg'>{likeCount}</Text>
+            </Stack>
+          }
           disabled={isAuthor}
+          onClick={handleLikePost}
         />
       </Stack>
 
