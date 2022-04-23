@@ -32,7 +32,7 @@ export const getUserFromSessionApi = () => {
 };
 
 // GET user from database
-export const getUserFormDatabaseApi = (userId: string) => {
+export const getUserFromDatabaseApi = (userId: string) => {
   return appWriteSDK.database.getDocument('users', userId);
 };
 
