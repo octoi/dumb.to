@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { commentOnPostApi } from '@/api/comment';
 import { showToast } from '@/utils/toast';
-import { Button, FormLabel, Textarea } from '@chakra-ui/react';
+import { Button, Textarea } from '@chakra-ui/react';
 
 interface Props {
   userId: string;
@@ -16,10 +16,13 @@ export const NewComment: React.FC<Props> = ({ userId, postId }) => {
     e.preventDefault();
 
     setLoading(true);
-
     commentOnPostApi(userId, postId, comment)
       .then(() => {
-        showToast('Lets gooo 🚀', 'Comment submitted successfully', 'success');
+        showToast(
+          'Comment submitted successfully',
+          'refresh to view latest changes',
+          'success'
+        );
         setComment('');
       })
       .catch((err) => {
@@ -32,9 +35,8 @@ export const NewComment: React.FC<Props> = ({ userId, postId }) => {
 
   return (
     <form onSubmit={handleCommentPost}>
-      <FormLabel fontSize='lg'>Comment ({comment.length}/500)</FormLabel>
       <Textarea
-        placeholder='Awesome post 🚀'
+        placeholder='Awesome post 🚀 (0/500)'
         variant='filled'
         value={comment}
         onChange={(e) => setComment(e.target.value)}

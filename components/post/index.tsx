@@ -8,7 +8,7 @@ import { Container, Flex, Text, Divider } from '@chakra-ui/react';
 import { AuthorData } from './AuthorData';
 import { MoreFromAuthor } from './MoreFromAuthor';
 import { PostButton } from './PostButton';
-import { NewComment } from './NewComment';
+import { Comments } from './comment';
 
 interface Props {
   post: PostType;
@@ -44,8 +44,7 @@ export const Post: React.FC<Props> = ({ post }) => {
         <AuthorData authorId={post.userId} />
         <MoreFromAuthor authorId={post.userId} viewingPostId={post.$id} />
         <Divider mt={5} mb={5} />
-        {user && <NewComment postId={post.$id} userId={user.id} />}
-        
+        <Comments postId={post.$id} postAuthorId={post.userId} user={user} />
       </Container>
     </div>
   );
