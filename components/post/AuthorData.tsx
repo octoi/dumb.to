@@ -25,7 +25,7 @@ export const AuthorData: React.FC<Props> = ({ authorId }) => {
   return (
     <>
       {author && (
-        <Flex mt={10} align='center'>
+        <Flex align='center'>
           <Avatar src={author.profile} name={author.name} />
           <Link href={`${Paths.user}/${authorId}`} passHref>
             <ChakraLink ml={2} fontSize='xl' fontWeight='medium'>
