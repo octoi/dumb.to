@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
 import { UserType } from '@/stores/user.store';
-import { getUserFormDatabaseApi } from '@/api/account';
+import { getUserFromDatabaseApi } from '@/api/account';
 import { Avatar, Flex, Link as ChakraLink } from '@chakra-ui/react';
 
 interface Props {
@@ -13,7 +13,7 @@ export const AuthorData: React.FC<Props> = ({ authorId }) => {
   const [author, setAuthor] = useState<UserType | undefined>();
 
   useEffect(() => {
-    getUserFormDatabaseApi(authorId)
+    getUserFromDatabaseApi(authorId)
       .then((data: any) => {
         setAuthor(data);
       })
