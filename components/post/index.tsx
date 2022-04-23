@@ -4,10 +4,11 @@ import { useState as useHookState } from '@hookstate/core';
 import { userStore } from '@/stores/user.store';
 import { PostType } from '@/utils/types';
 import { MarkdownPreview } from '../MarkdownPreview';
-import { Container, Flex, Text } from '@chakra-ui/react';
+import { Container, Flex, Text, Divider } from '@chakra-ui/react';
 import { AuthorData } from './AuthorData';
 import { MoreFromAuthor } from './MoreFromAuthor';
 import { PostButton } from './PostButton';
+import { NewComment } from './NewComment';
 
 interface Props {
   post: PostType;
@@ -39,8 +40,12 @@ export const Post: React.FC<Props> = ({ post }) => {
           {moment(post.createdAt).fromNow()}
         </Text>
         <MarkdownPreview markdown={post.content} />
+        <Divider mt={5} mb={5} />
         <AuthorData authorId={post.userId} />
         <MoreFromAuthor authorId={post.userId} viewingPostId={post.$id} />
+        <Divider mt={5} mb={5} />
+        {user && <NewComment postId={post.$id} userId={user.id} />}
+        
       </Container>
     </div>
   );
