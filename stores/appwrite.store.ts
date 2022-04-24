@@ -1,6 +1,6 @@
 import { Appwrite } from 'appwrite';
 import { createState, Downgraded } from '@hookstate/core';
-import appWriteConfig from '../appwrite.config.json'; // create this file
+import appWriteConfig from '../appwrite.json'; // create this file
 
 const appWriteSDK = new Appwrite();
 
