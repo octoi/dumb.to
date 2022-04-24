@@ -38,7 +38,7 @@ yarn-error.log*
 *.lock
 
 # appwrite config
-appwrite.config.json
+appwrite.json
 
 # workspace
 .vscode
