@@ -5,3 +5,5 @@
 Dumb is a blogging app similar like dev.to made with Next JS & appwrite as backend.
 
 <img src="./public/dumb.svg" alt="dumb.to" />
+
+WIP
