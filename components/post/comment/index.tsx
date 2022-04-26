@@ -39,7 +39,13 @@ export const Comments: React.FC<Props> = ({ postId, postAuthorId, user }) => {
 
   return (
     <div>
-      {user && <NewComment postId={postId} userId={user.id} />}
+      {user && (
+        <NewComment
+          postId={postId}
+          userId={user.id}
+          postAuthorId={postAuthorId}
+        />
+      )}
       <Stack mt={5}>
         <h2 className='text-xl font-medium mb-2'>
           Comments ({comments.length})
