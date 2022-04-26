@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { commentOnPostApi } from '@/api/comment';
 import { showToast } from '@/utils/toast';
 import { Button, Textarea } from '@chakra-ui/react';
+import { notifyUserApi } from '@/api/notification';
 
 interface Props {
   userId: string;
   postId: string;
+  postAuthorId: string;
 }
 
-export const NewComment: React.FC<Props> = ({ userId, postId }) => {
+export const NewComment: React.FC<Props> = ({
+  userId,
+  postId,
+  postAuthorId,
+}) => {
   const [comment, setComment] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -24,6 +30,15 @@ export const NewComment: React.FC<Props> = ({ userId, postId }) => {
           'success'
         );
         setComment('');
+
+        if (userId !== postAuthorId) {
+          notifyUserApi(
+            postAuthorId,
+            userId,
+            postId,
+            'commented on your post'
+          ).catch(console.log);
+        }
       })
       .catch((err) => {
         showToast('Failed to submit comment', err?.message, 'error');
