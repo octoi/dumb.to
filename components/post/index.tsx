@@ -33,7 +33,12 @@ export const Post: React.FC<Props> = ({ post }) => {
         <Flex align='center' justify='space-between' mb={2}>
           <h2 className='text-4xl font-bold'>{post.title}</h2>
           {user && (
-            <PostButton postId={post.$id} user={user} isAuthor={isAuthor} />
+            <PostButton
+              postId={post.$id}
+              user={user}
+              isAuthor={isAuthor}
+              authorId={post.userId}
+            />
           )}
         </Flex>
         <Text mb={5} className='text-app-text2'>

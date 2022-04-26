@@ -21,14 +21,21 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from '@chakra-ui/react';
+import { notifyUserApi } from '@/api/notification';
 
 interface Props {
   postId: string;
+  authorId: string;
   user: UserType;
   isAuthor: boolean;
 }
 
-export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
+export const PostButton: React.FC<Props> = ({
+  isAuthor,
+  user,
+  postId,
+  authorId,
+}) => {
   const [likeCount, setLikeCount] = useState(0);
   const [isUserLiked, setIsUserLiked] = useState(false);
 
@@ -68,9 +75,15 @@ export const PostButton: React.FC<Props> = ({ isAuthor, user, postId }) => {
     if (isAuthor) return;
 
     likePostApi(postId, user.id)
-      .then(() => {
+      .then(async () => {
         setLikeCount((prev) => (isUserLiked ? prev - 1 : prev + 1));
         setIsUserLiked((prev) => !prev);
+
+        if (!isUserLiked && authorId !== user?.id) {
+          notifyUserApi(authorId, user?.id, postId, 'liked your post').catch(
+            console.log
+          );
+        }
       })
       .catch((err) => {
         showToast('Oops something went wrong', err?.message, 'error');
