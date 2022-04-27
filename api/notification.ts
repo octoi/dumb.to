@@ -13,5 +13,6 @@ export const notifyUserApi = (
     actionUserId,
     actionPostId,
     message,
+    createdAt: Date.now(),
   });
 };
