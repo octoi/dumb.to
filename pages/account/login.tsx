@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import { Layout } from '@/components/Layout';
 import { LoginForm } from '@/components/login';
 
-const Register: NextPage = () => {
+const Login: NextPage = () => {
   return (
     <Layout title='Register'>
       <LoginForm />
@@ -10,4 +10,4 @@ const Register: NextPage = () => {
   );
 };
 
-export default Register;
+export default Login;
