@@ -13,7 +13,6 @@ import {
   AlertDialogOverlay,
   Avatar,
   Button,
-  IconButton,
   Menu,
   MenuButton,
   MenuDivider,
@@ -22,7 +21,6 @@ import {
   Stack,
   useDisclosure,
 } from '@chakra-ui/react';
-import { AddIcon } from '@chakra-ui/icons';
 
 interface Props {
   user: UserType;
@@ -69,6 +67,9 @@ export const LoggedInUserRHS: React.FC<Props> = ({ user }) => {
             </Link>
             <Link href={Paths.settings} passHref>
               <MenuItem>Settings</MenuItem>
+            </Link>
+            <Link href={Paths.notifications} passHref>
+              <MenuItem>Notifications</MenuItem>
             </Link>
             <MenuDivider />
             <MenuItem onClick={onOpen} className='text-red-400'>
