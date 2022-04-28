@@ -18,16 +18,18 @@ export const notifyUserApi = (
   });
 };
 
-export const subscribeToNotificationApi = () => {
+export const subscribeToNotificationApi = (currentUserId: string) => {
   appWriteSDK.subscribe('collections.notifications.documents', (data) => {
     if (data.event === 'database.documents.create') {
       let payload: any = data.payload;
 
-      showToast(
-        `Someone ${payload?.message}`,
-        'View notification page to know more',
-        'info'
-      );
+      if (payload?.targetUserId === currentUserId) {
+        showToast(
+          `Someone ${payload?.message}`,
+          'View notification page to know more',
+          'info'
+        );
+      }
     }
   });
 };
