@@ -1,5 +1,6 @@
 import { getAppWriteSDK } from '@/stores/appwrite.store';
 import { showToast } from '@/utils/toast';
+import { Query } from 'appwrite';
 
 const appWriteSDK = getAppWriteSDK();
 
@@ -32,4 +33,14 @@ export const subscribeToNotificationApi = (currentUserId: string) => {
       }
     }
   });
+};
+
+export const loadMyNotificationsApi = (currentUserId: string) => {
+  return appWriteSDK.database.listDocuments('notifications', [
+    Query.equal('targetUserId', currentUserId),
+  ]);
+};
+
+export const deleteNotificationApi = (notificationId: string) => {
+  return appWriteSDK.database.deleteDocument('notifications', notificationId);
 };
