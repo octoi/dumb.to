@@ -1,4 +1,5 @@
 import { getAppWriteSDK } from '@/stores/appwrite.store';
+import { showToast } from '@/utils/toast';
 
 const appWriteSDK = getAppWriteSDK();
 
@@ -14,5 +15,19 @@ export const notifyUserApi = (
     actionPostId,
     message,
     createdAt: Date.now(),
+  });
+};
+
+export const subscribeToNotificationApi = () => {
+  appWriteSDK.subscribe('collections.notifications.documents', (data) => {
+    if (data.event === 'database.documents.create') {
+      let payload: any = data.payload;
+
+      showToast(
+        `Someone ${payload?.message}`,
+        'View notification page to know more',
+        'info'
+      );
+    }
   });
 };
