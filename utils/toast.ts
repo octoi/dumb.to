@@ -5,7 +5,7 @@ const toast = createStandaloneToast({ colorMode: 'dark' });
 export const showToast = (
   title: string,
   description: string,
-  status: 'error' | 'success',
+  status: 'error' | 'success' | 'info',
   options?: UseToastOptions
 ) => {
   toast({

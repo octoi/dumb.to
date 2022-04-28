@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
 import { Container, Flex, IconButton, Stack } from '@chakra-ui/react';
 import { SearchBar } from './SearchBar';
 import { GuestUserRHS } from './GuestUserRHS';
-import { useState } from '@hookstate/core';
+import { useState as useHookState } from '@hookstate/core';
 import { userStore } from '@/stores/user.store';
 import { LoggedInUserRHS } from './LoggedInUserRHS';
 import { SearchIcon } from '@chakra-ui/icons';
+import { subscribeToNotificationApi } from '@/api/notification';
 
 interface Props {
   removeMargin?: boolean;
 }
 
 export const Header: React.FC<Props> = ({ removeMargin }) => {
-  const userState = useState(userStore);
+  const userState = useHookState(userStore);
   const user = userState.get();
+
+  const [subscribed, setSubscribed] = useState(false);
+
+  useEffect(() => {
+    if (!user) return;
+    if (subscribed) return;
+
+    subscribeToNotificationApi(user.id);
+    setSubscribed(true);
+  }, [user]);
 
   return (
     <div className={`bg-slate-50 ${!removeMargin && 'mb-10'}`}>
