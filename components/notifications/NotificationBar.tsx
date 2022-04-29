@@ -15,6 +15,7 @@ import {
   Flex,
   IconButton,
   useDisclosure,
+  Text,
 } from '@chakra-ui/react';
 import {
   AlertDialog,
@@ -24,6 +25,7 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from '@chakra-ui/react';
+import moment from 'moment';
 
 interface Props {
   notification: Notification;
@@ -77,19 +79,30 @@ export const NotificationBar: React.FC<Props> = ({ notification }) => {
             src={actionUser?.profile || notification.actionUserId}
             name={actionUser?.name || notification.actionUserId}
           />
-          <p className='ml-2 text-lg text-app-text2'>
-            <Link passHref href={`${Paths.user}/${notification.actionUserId}`}>
-              <span className='font-medium text-xl text-app-text1 cursor-pointer transition-all duration-200 hover:underline'>
-                {actionUser?.name || notification.actionUserId}
-              </span>
-            </Link>
-            <span className='mx-2'>{notification.message}</span>
-            <Link passHref href={`${Paths.post}/${notification.actionPostId}`}>
-              <span className='font-medium text-xl text-app-text1 cursor-pointer transition-all duration-200 hover:underline'>
-                {actionPost?.title || notification.actionPostId}
-              </span>
-            </Link>
-          </p>
+          <Flex direction='column'>
+            <p className='ml-2 text-lg text-app-text2'>
+              <Link
+                passHref
+                href={`${Paths.user}/${notification.actionUserId}`}
+              >
+                <span className='font-medium text-xl text-app-text1 cursor-pointer transition-all duration-200 hover:underline'>
+                  {actionUser?.name || notification.actionUserId}
+                </span>
+              </Link>
+              <span className='mx-2'>{notification.message}</span>
+              <Link
+                passHref
+                href={`${Paths.post}/${notification.actionPostId}`}
+              >
+                <span className='font-medium text-xl text-app-text1 cursor-pointer transition-all duration-200 hover:underline'>
+                  {actionPost?.title || notification.actionPostId}
+                </span>
+              </Link>
+            </p>
+            <Text mt={2} className='text-app-text2'>
+              {moment(notification.createdAt).fromNow()}
+            </Text>
+          </Flex>
         </Flex>
         <IconButton
           variant='ghost'
