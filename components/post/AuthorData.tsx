@@ -27,11 +27,14 @@ export const AuthorData: React.FC<Props> = ({ authorId }) => {
       {author && (
         <Flex align='center'>
           <Avatar src={author.profile} name={author.name} />
-          <Link href={`${Paths.user}/${authorId}`} passHref>
-            <ChakraLink ml={2} fontSize='xl' fontWeight='medium'>
-              {author.name}
-            </ChakraLink>
-          </Link>
+          <Flex ml={2} direction='column'>
+            <Link href={`${Paths.user}/${authorId}`} passHref>
+              <ChakraLink fontSize='xl' fontWeight='medium'>
+                {author.name}
+              </ChakraLink>
+            </Link>
+            {author.bio}
+          </Flex>
         </Flex>
       )}
     </>
