@@ -52,7 +52,11 @@ export const Comments: React.FC<Props> = ({ postId, postAuthorId, user }) => {
         </h2>
         {loading && <p>Loading...</p>}
         {comments.map((comment) => (
-          <CommentDisplay comment={comment} postAuthorId={postAuthorId} />
+          <CommentDisplay
+            key={comment.$id}
+            comment={comment}
+            postAuthorId={postAuthorId}
+          />
         ))}
       </Stack>
     </div>
