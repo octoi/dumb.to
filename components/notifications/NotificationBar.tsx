@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import Link from 'next/link';
 import { getUserFromDatabaseApi } from '@/api/account';
 import { getPostFromDatabaseApi } from '@/api/post';
@@ -25,7 +26,6 @@ import {
   AlertDialogContent,
   AlertDialogOverlay,
 } from '@chakra-ui/react';
-import moment from 'moment';
 
 interface Props {
   notification: Notification;
@@ -99,7 +99,7 @@ export const NotificationBar: React.FC<Props> = ({ notification }) => {
                 </span>
               </Link>
             </p>
-            <Text mt={2} className='text-app-text2'>
+            <Text className='ml-2 text-app-text2'>
               {moment(notification.createdAt).fromNow()}
             </Text>
           </Flex>
