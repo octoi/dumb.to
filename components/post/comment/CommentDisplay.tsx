@@ -45,7 +45,7 @@ export const CommentDisplay: React.FC<Props> = ({ comment, postAuthorId }) => {
     getUserFromDatabaseApi(comment.userId).then((userData: any) => {
       setCommentAuthor(userData);
     });
-  });
+  }, [comment]);
 
   const handleDeleteComment = () => {
     // only comment author & post author should be able to delete comment
