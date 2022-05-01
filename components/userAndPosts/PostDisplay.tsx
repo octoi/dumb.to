@@ -9,12 +9,14 @@ import { Avatar, Flex, Link as NextLink, Text } from '@chakra-ui/react';
 
 interface Props {
   post: PostType;
+  author: UserType | null;
 }
 
-export const Post: React.FC<Props> = ({ post }) => {
-  const [postAuthor, setPostAuthor] = useState<UserType | null>(null);
+export const PostDisplay: React.FC<Props> = ({ post, author }) => {
+  const [postAuthor, setPostAuthor] = useState<UserType | null>(author);
 
   useEffect(() => {
+    if (author) return;
     getUserFromDatabaseApi(post.userId).then((userData: any) => {
       setPostAuthor(userData);
     });
