@@ -23,6 +23,11 @@ export const savePostToDatabaseApi = (
   ]);
 };
 
+// get posts
+export const getAllPostsFromDatabaseApi = () => {
+  return appWriteSDK.database.listDocuments('posts');
+};
+
 // get post
 export const getPostFromDatabaseApi = (postId: string) => {
   return appWriteSDK.database.getDocument('posts', postId);
