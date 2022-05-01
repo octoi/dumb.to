@@ -32,6 +32,7 @@ export const Posts: React.FC = () => {
       {posts.map((post) => (
         <Post key={post.$id} post={post} />
       ))}
+      {!loading && !error && posts.length === 0 && <p>No post found</p>}
     </div>
   );
 };
