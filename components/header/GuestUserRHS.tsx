@@ -16,7 +16,11 @@ export const GuestUserRHS: React.FC = () => {
       </Link>
 
       <Link passHref href={Paths.register}>
-        <Button variant='solid' colorScheme='teal' className='hover:underline'>
+        <Button
+          variant='solid'
+          colorScheme='teal'
+          className='ml-0 md:ml-4 hover:underline'
+        >
           Create account
         </Button>
       </Link>
