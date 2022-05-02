@@ -4,7 +4,7 @@ import { LoginForm } from '@/components/login';
 
 const Login: NextPage = () => {
   return (
-    <Layout title='Register'>
+    <Layout title='Login'>
       <LoginForm />
     </Layout>
   );
