@@ -12,9 +12,10 @@ import { subscribeToNotificationApi } from '@/api/notification';
 
 interface Props {
   removeMargin?: boolean;
+  query?: string;
 }
 
-export const Header: React.FC<Props> = ({ removeMargin }) => {
+export const Header: React.FC<Props> = ({ removeMargin, query }) => {
   const userState = useHookState(userStore);
   const user = userState.get();
 
@@ -40,7 +41,7 @@ export const Header: React.FC<Props> = ({ removeMargin }) => {
                 className='w-20 cursor-pointer'
               />
             </Link>
-            <SearchBar />
+            <SearchBar query={query} />
           </Flex>
           <Stack direction='row' spacing={4} align='center'>
             <Link passHref href={Paths.search}>
