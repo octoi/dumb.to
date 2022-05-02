@@ -10,6 +10,7 @@ interface Props {
   description?: string;
   image?: string;
   banner?: string;
+  query?: string;
 }
 
 export const Layout: ReactComponent<Props> = ({
@@ -18,6 +19,7 @@ export const Layout: ReactComponent<Props> = ({
   description,
   image,
   banner,
+  query,
 }) => {
   return (
     <>
@@ -27,7 +29,7 @@ export const Layout: ReactComponent<Props> = ({
         image={image}
         banner={banner}
       />
-      <Header />
+      <Header query={query} />
       <Container maxW='container.xl'>{children}</Container>
       <Footer />
     </>

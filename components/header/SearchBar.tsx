@@ -1,19 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Paths } from '@/utils/paths';
 import { SearchIcon } from '@chakra-ui/icons';
+import { colors } from '@/utils/colors';
 import {
   IconButton,
   Input,
   InputGroup,
   InputRightElement,
 } from '@chakra-ui/react';
-import { colors } from '@/utils/colors';
 
-export const SearchBar: React.FC = () => {
+interface Props {
+  query?: string;
+}
+
+export const SearchBar: React.FC<Props> = ({ query }) => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (searchQuery.trim().length === 0) {
+      setSearchQuery(query || '');
+    }
+  }, [query]);
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();

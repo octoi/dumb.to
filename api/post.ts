@@ -28,6 +28,13 @@ export const getAllPostsFromDatabaseApi = () => {
   return appWriteSDK.database.listDocuments('posts');
 };
 
+// search post
+export const searchAndGetPostsFromDatabaseApi = (query: string) => {
+  return appWriteSDK.database.listDocuments('posts', [
+    Query.search('title', query),
+  ]);
+};
+
 // get post
 export const getPostFromDatabaseApi = (postId: string) => {
   return appWriteSDK.database.getDocument('posts', postId);

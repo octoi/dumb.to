@@ -7,12 +7,14 @@ interface Props {
   user: UserType | null;
   loadUserPosts?: boolean;
   hideUserFromSmallScreen?: boolean;
+  query?: string;
 }
 
 export const UserAndPosts: React.FC<Props> = ({
   user,
   hideUserFromSmallScreen,
   loadUserPosts,
+  query,
 }) => {
   return (
     <div className='flex flex-col md:flex-row-reverse'>
@@ -20,7 +22,7 @@ export const UserAndPosts: React.FC<Props> = ({
         user={user}
         hideUserFromSmallScreen={hideUserFromSmallScreen}
       />
-      <Posts user={user} loadUserPosts={loadUserPosts} />
+      <Posts user={user} loadUserPosts={loadUserPosts} query={query} />
     </div>
   );
 };
