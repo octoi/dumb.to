@@ -6,14 +6,16 @@ import { PostDisplay } from './PostDisplay';
 import {
   getAllPostsFromDatabaseApi,
   getPostsOfUserFromDatabaseApi,
+  searchAndGetPostsFromDatabaseApi,
 } from '@/api/post';
 
 interface Props {
   user: UserType | null;
   loadUserPosts?: boolean;
+  query?: string;
 }
 
-export const Posts: React.FC<Props> = ({ user, loadUserPosts }) => {
+export const Posts: React.FC<Props> = ({ user, loadUserPosts, query }) => {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -22,6 +24,10 @@ export const Posts: React.FC<Props> = ({ user, loadUserPosts }) => {
     if (user && loadUserPosts) {
       return getPostsOfUserFromDatabaseApi(user.id);
     }
+    if (query) {
+      return searchAndGetPostsFromDatabaseApi(query);
+    }
+
     return getAllPostsFromDatabaseApi();
   };
 
@@ -32,18 +38,20 @@ export const Posts: React.FC<Props> = ({ user, loadUserPosts }) => {
         setError('');
       })
       .catch((err) => {
+        console.log(err);
         showToast('Failed to load posts', err?.message, 'error');
         setError(err?.message);
       })
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [user, query]);
 
   return (
     <div className='w-full'>
       <h2 className='text-2xl md:text-3xl font-bold mb-5'>
-        All posts {loadUserPosts && `by ${user?.name}`}
+        {query && `Searching for "${query}"`}
+        {!query && <>All posts {loadUserPosts && `by ${user?.name}`}</>}
       </h2>
       {loading && <p>Loading ...</p>}
       {error && <p>{error}</p>}
