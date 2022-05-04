@@ -6,7 +6,11 @@ import { Paths } from '@/utils/paths';
 import { ReactComponent } from '@/utils/reactTypes';
 
 // `toString()` to get the inside value
-const guestUserOnlyRoutes = [Paths.login.toString(), Paths.register.toString()];
+const guestUserDeniedRoutes = [
+  Paths.newPost.toString(),
+  Paths.settings.toString(),
+  Paths.notifications.toString(),
+];
 
 export const AuthWrapper: ReactComponent = ({ children }) => {
   const userState = useState(userStore);
@@ -16,13 +20,14 @@ export const AuthWrapper: ReactComponent = ({ children }) => {
 
   useEffect(() => {
     const pathname = router.pathname;
-    const isInList = guestUserOnlyRoutes.includes(pathname);
+    const isInList = guestUserDeniedRoutes.includes(pathname);
 
-    if ((user && !isInList) || (!user && isInList)) {
+    if (!(!user && isInList)) {
       return;
     }
 
-    router.push(Paths.app);
+    let url = `${Paths.login}?next=${pathname}`;
+    router.push(url);
   }, [user, router]);
 
   return <>{children}</>;
