@@ -26,6 +26,13 @@ export const PostDisplay: React.FC<Props> = ({ post, author }) => {
     <Link passHref href={`${Paths.post}/${post.$id}`}>
       <NextLink href={`${Paths.post}/${post.$id}`}>
         <div className='bg-slate-50 rounded p-3 mb-2 cursor-pointer'>
+          {post.cover && (
+            <img
+              src={post?.cover}
+              alt={post.title}
+              className='h-40 w-full object-cover mb-3'
+            />
+          )}
           <h2 className='font-medium text-xl'>{post.title}</h2>
           <p className='mt-2 text-app-text2'>
             {moment(post.createdAt).fromNow()}

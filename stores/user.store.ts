@@ -17,6 +17,7 @@ export const loadDataFromSession = () => {
         name: data?.name,
         email: data?.email,
         profile: data?.profile,
+        bio: data?.bio,
       });
     })
     .catch(() => {

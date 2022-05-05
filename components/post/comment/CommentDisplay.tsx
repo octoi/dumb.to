@@ -73,7 +73,7 @@ export const CommentDisplay: React.FC<Props> = ({ comment, postAuthorId }) => {
           src={commentAuthor?.profile}
           mr={2}
         />
-        <div className='p-3 rounded border border-app-text1 border-opacity-30'>
+        <div className='px-4 py-2 rounded bg-slate-100 border border-app-text1 border-opacity-30'>
           <Flex direction='row' align='center' justify='space-between' mb={2}>
             <Stack direction='row' align='center'>
               <Link passHref href={`${Paths.user}/${comment.userId}`}>
