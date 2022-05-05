@@ -73,16 +73,7 @@ export const updatePasswordApi = (password: string) => {
   return appWriteSDK.account.updatePassword(password);
 };
 
-// UPDATE user in appwrite database
-export const updateUserDataInDatabaseApi = (
-  userId: string,
-  name: string,
-  email: string,
-  profile: string
-) => {
-  return appWriteSDK.database.updateDocument('users', userId, {
-    name,
-    email,
-    profile,
-  });
+// Update user profile
+export const updateUserDataInDatabaseApi = (userId: string, data: any) => {
+  return appWriteSDK.database.updateDocument('users', userId, data);
 };
