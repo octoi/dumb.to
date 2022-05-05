@@ -69,8 +69,8 @@ export const updateUserEmailApi = (email: string, password: string) => {
   return appWriteSDK.account.updateEmail(email, password);
 };
 
-export const updatePasswordApi = (password: string) => {
-  return appWriteSDK.account.updatePassword(password);
+export const updatePasswordApi = (password: string, oldPassword: string) => {
+  return appWriteSDK.account.updatePassword(password, oldPassword);
 };
 
 // Update user profile
