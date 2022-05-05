@@ -2,6 +2,7 @@ import React from 'react';
 import { useState as useHookState } from '@hookstate/core';
 import { userStore } from '@/stores/user.store';
 import { EditAvatar } from './EditAvatar';
+import { EditInput } from './EditInput';
 
 export const Settings: React.FC = () => {
   const userState = useHookState(userStore);
@@ -13,6 +14,10 @@ export const Settings: React.FC = () => {
       {user && (
         <>
           <EditAvatar user={user} />
+          <EditInput user={user} value={user.name} type='name' />
+          <EditInput user={user} value={user.email} type='email' />
+          <EditInput user={user} value='' type='password' />
+          <EditInput user={user} value={user.bio || ''} type='bio' />
         </>
       )}
     </div>
