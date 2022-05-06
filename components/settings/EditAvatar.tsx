@@ -156,6 +156,7 @@ export const EditAvatar: React.FC<Props> = ({ user }) => {
               colorScheme='teal'
               mr={3}
               onClick={handleSaveAvatar}
+              isLoading={loading}
             >
               Save
             </Button>
