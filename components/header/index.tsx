@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Paths } from '@/utils/paths';
-import { Container, Flex, IconButton, Stack } from '@chakra-ui/react';
+import { Container, Flex, Stack } from '@chakra-ui/react';
 import { SearchBar } from './SearchBar';
 import { GuestUserRHS } from './GuestUserRHS';
 import { useState as useHookState } from '@hookstate/core';
 import { userStore } from '@/stores/user.store';
 import { LoggedInUserRHS } from './LoggedInUserRHS';
-import { SearchIcon } from '@chakra-ui/icons';
 import { subscribeToNotificationApi } from '@/api/notification';
+import { SearchButton } from './SearchButton';
 
 interface Props {
   removeMargin?: boolean;
@@ -44,15 +44,7 @@ export const Header: React.FC<Props> = ({ removeMargin, query }) => {
             <SearchBar query={query} />
           </Flex>
           <Stack direction='row' spacing={4} align='center'>
-            <Link passHref href={Paths.search}>
-              <IconButton
-                variant='solid'
-                aria-label='Search'
-                icon={<SearchIcon />}
-                type='submit'
-                className='block md:hidden'
-              />
-            </Link>
+            <SearchButton />
             {user ? <LoggedInUserRHS user={user} /> : <GuestUserRHS />}
           </Stack>
         </Flex>
