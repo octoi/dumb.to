@@ -7,7 +7,9 @@ export const registerUser = (name: string, email: string, password: string) => {
       .then(() => {
         loginUserApi(email, password)
           .then((userData) => {
-            let profile = `https://avatars.dicebear.com/api/initials/${name}.svg`;
+            let profile = `https://avatars.dicebear.com/api/initials/${encodeURI(
+              name
+            )}.svg`;
 
             saveUserDataApi(userData.userId, name, email, profile)
               .then((data) => {
