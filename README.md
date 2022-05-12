@@ -20,9 +20,9 @@ Check [how to setup](./installation.md).
 
 ## Screenshots
 
-<img src="./screenshots/feed.png" alt="feed" width="48%">
-<img src="./screenshots/new_post.png" alt="new post" width="49%">
-<img src="./screenshots/post.png" alt="post" width="48%">
-<img src="./screenshots/comments.png" alt="comments" width="49%">
-<img src="./screenshots/settings.png" alt="settings" width="48%">
-<img src="./screenshots/notifications.png" alt="notifications" width="49%">
+<img src="./screenshots/feed.png" alt="feed" width="100%">
+<img src="./screenshots/new_post.png" alt="new post" width="100%">
+<img src="./screenshots/post.png" alt="post" width="100%">
+<img src="./screenshots/comments.png" alt="comments" width="100%">
+<img src="./screenshots/settings.png" alt="settings" width="100%">
+<img src="./screenshots/notifications.png" alt="notifications" width="100%">
