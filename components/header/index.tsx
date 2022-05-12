@@ -25,7 +25,7 @@ export const Header: React.FC<Props> = ({ removeMargin, query }) => {
     if (!user) return;
     if (subscribed) return;
 
-    subscribeToNotificationApi(user.id);
+    subscribeToNotificationApi(user?.id);
     setSubscribed(true);
   }, [user]);
 
